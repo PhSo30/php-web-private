@@ -19,12 +19,12 @@
                         Auth
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/php-web-private/pages/login.php">Login</a></li>
+                        <li><a class="dropdown-item" href="/php-web-private/?page=login">Login</a></li>
 
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="/php-web-private/pages/register.php">Register</a></li>
+                        <li><a class="dropdown-item" href="/php-web-private/?page=register">Register</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
