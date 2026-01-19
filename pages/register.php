@@ -15,9 +15,6 @@ $name = $username = $passwd = $confirmpassword = '';
         if(empty($passwd)){
             $passwdError = "Password is required";
         }
-        if(empty($confirmpassword)){
-            $confirmpasswordError = "Confirm Password is required";
-        }
         if(empty($username)){
             $usernameError = "Username is required";
         }
