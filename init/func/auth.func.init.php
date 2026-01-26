@@ -1,4 +1,6 @@
 <?php
+
+use LDAP\Result;
     
     function usernameExist($username){
         global $db;
@@ -22,6 +24,17 @@
             return true;
         }
         return false;
+    }
+    function loginUser($username, $passwd){
+        global $db;
+        $query = $db->prepare('SELECT * FROM tbl_users WHERE username = ? AND passwd = ?');
+        $query->bind_param('ss', $username, $passwd);
+        $query->execute();
+        $result = $query->get_result();
+        if($result->num_rows){
+            return false;
+        }
+        return true;
     }
     
 

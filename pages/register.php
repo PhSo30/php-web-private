@@ -21,9 +21,9 @@ if (isset($_POST['username'], $_POST['password'], $_POST['confirmpassword'], $_P
     if ($passwd !== $confirmpassword) {
         $confirmpasswordError = "Password not match";
     }
-    // if(strlen($passwd) < 6 || strlen($passwd) > 25){
-    //     $passwdError = "Password must be at least 6 characters";
-    // }
+    if(strlen($passwd) < 6 || strlen($passwd) > 25){
+        $passwdError = "Password must be at least 6 characters";
+    }
     if (usernameExist($username)) {
         $usernameError = 'Usename is currently unavailable!';
     }
