@@ -15,13 +15,12 @@ if (isset($_POST['username'], $_POST['passwd'])) {
         $usernameError = 'No username match!';
     }
     if (empty($usernameError) && empty($passwdError)) {
-        if (loginUser($username, $passwd)) {
-            $username = $passwd = '';
-            echo '<div class="alert alert-success" role="alert">
-    Login successful! Click to continue to <a href="./?page=home" class="alert-link">HOME</a>. Give it a click if you like.
-</div>';
+        $user = loginUser($username, $passwd);
+        if ($user !== false) {
+            $_SESSION['user_id'] = $user->id;
+            header('Location: ./?page=dashboard');
         } else {
-            $passwdError = 'Password is incorrect!';
+            $usernameError = 'Username or Password is incorrect';
         }
     }
 }

@@ -19,12 +19,16 @@
                         Auth
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/php-web-private/?page=login">Login</a></li>
+                        <?php if (empty($user)) { ?>
+                            <li><a class="dropdown-item" href="/php-web-private/?page=login">Login</a></li>
 
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="/php-web-private/?page=register">Register</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/php-web-private/?page=register">Register</a></li>
+                        <?php } else { ?>
+                            <li><a class="dropdown-item" href="/php-web-private/?page=logout">Logout</a></li>
+                        <?php } ?>
                     </ul>
                 </li>
                 <li class="nav-item">
