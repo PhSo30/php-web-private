@@ -11,7 +11,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>-->
                 <li class="nav-item">
-                    <?php if (isAdmin()) { ?>
+                    <?php if ($isAdmin) { ?>
                         <a class="nav-link" href="<?php echo $baseUrl ?>?page=user/list">User</a>
                     <?php } ?>
                 </li>

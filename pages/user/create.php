@@ -3,7 +3,8 @@
 $nameError = $usernameError = $passwdError = '';
 $name = $username = '';
 
-if (isset($_POST['username'], $_POST['password'], $_POST['name'])) {
+if (isset($_POST['username'], $_POST['password'], $_POST['name'], $_POST['photo'])) {
+    $photo = $_FILES['photo'];
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $passwd = trim($_POST['password']);
@@ -23,14 +24,14 @@ if (isset($_POST['username'], $_POST['password'], $_POST['name'])) {
         $usernameError = 'Username is currently unavailable!';
     }
     if (empty($nameError) && empty($usernameError) && empty($passwdError)) {
-        if (registerUser($name, $username, $passwd)) {
+        if (createUser($name, $username, $passwd, $photo)) {
             $name = $username = '';
             echo '<div class="alert alert-success" role="alert">
-                 Register is successful!
+                 Created successful!
                 </div>';
         } else {
             echo '<div class="alert alert-danger" role="alert">
-                 Please try again!
+                 Create fail!
                 </div>';
         }
 
@@ -38,7 +39,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['name'])) {
 }
 ?>
 
-<form method="post" action="./?page=register" class="col-md-8 col-lg-6 mx-auto">
+<form method="post" action="./?page=register" class="col-md-8 col-lg-6 mx-auto" enctype="multipart/form-data">
     <h3>Create User</h3>
     <div class="d-flex justify-content-center">
         <input name="photo" type="file" id="profileUpload" hidden>
