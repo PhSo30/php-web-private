@@ -8,10 +8,17 @@ function createUser($name, $username, $password, $photo){
     $query = $db->prepare('INSERT INTO tbl_users (name,username,passwd,photo) VALUES (?,?,?,?)');
     $query->bind_param('ssss', $name,$username, $password,$image_path);
     $query->execute();
-    if($query->get_result()){
+    if($query->affected_rows){
         return true;
     } 
     return false;
+}
+function getUsers(){
+    global $db;
+    $query = $db->prepare('SELECT * FROM tbl_users WHERE level <> "admin"');
+    $query->execute();
+    $result = $query->get_result();
+    return $result;
 }
 
 ?>

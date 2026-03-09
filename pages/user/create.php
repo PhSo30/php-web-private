@@ -1,9 +1,8 @@
 <?php
-
 $nameError = $usernameError = $passwdError = '';
 $name = $username = '';
 
-if (isset($_POST['username'], $_POST['password'], $_POST['name'], $_POST['photo'])) {
+if (isset($_POST['username'], $_POST['password'], $_POST['name'], $_FILES['photo'])) {
     $photo = $_FILES['photo'];
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
@@ -23,11 +22,12 @@ if (isset($_POST['username'], $_POST['password'], $_POST['name'], $_POST['photo'
     if (usernameExist($username)) {
         $usernameError = 'Username is currently unavailable!';
     }
+    try{
     if (empty($nameError) && empty($usernameError) && empty($passwdError)) {
         if (createUser($name, $username, $passwd, $photo)) {
             $name = $username = '';
             echo '<div class="alert alert-success" role="alert">
-                 Created successful!
+                 Created successful! <a href="./?page=create/list">CLICK LIST</a>
                 </div>';
         } else {
             echo '<div class="alert alert-danger" role="alert">
@@ -35,11 +35,15 @@ if (isset($_POST['username'], $_POST['password'], $_POST['name'], $_POST['photo'
                 </div>';
         }
 
+    }} catch(Exception $e){
+        echo '<div class="alert alert-danger" role="alert">
+                 '. $e -> getMessage().'
+                </div>';
     }
 }
 ?>
 
-<form method="post" action="./?page=register" class="col-md-8 col-lg-6 mx-auto" enctype="multipart/form-data">
+<form method="post" action="./?page=user/create" class="col-md-8 col-lg-6 mx-auto" enctype="multipart/form-data">
     <h3>Create User</h3>
     <div class="d-flex justify-content-center">
         <input name="photo" type="file" id="profileUpload" hidden>
