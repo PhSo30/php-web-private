@@ -21,33 +21,28 @@ if (isset($_POST['username'], $_POST['password'], $_POST['name'], $_FILES['photo
     if (empty($name)) {
         $nameError = "Name is required";
     }
-    if (empty($passwd)) {
-        $passwdError = "Password is required";
-    }
     if (empty($username)) {
         $usernameError = "Username is required";
     }
-    if (strlen($passwd) < 6 || strlen($passwd) > 25) {
+    if (!empty($passwd) && (strlen($passwd) < 6 || strlen($passwd) > 25)) {
         $passwdError = "Password must be at least 6 characters";
     }
     if ($targetUser->username !== $username && usernameExist($username)) {
         $usernameError = 'Username is currently unavailable!';
     }
     try{
-    // if (empty($nameError) && empty($usernameError) && empty($passwdError)) {
-    //     if (updateUser($name, $username, $passwd, $photo)) {
-    //         $name = $username = '';
-    //         echo '<div class="alert alert-success" role="alert">
-    //              Created successful! <a href="./?page=create/list">CLICK LIST</a>
-    //             </div>';
-    //     } else {
-    //         echo '<div class="alert alert-danger" role="alert">
-    //              Create fail!
-    //             </div>';
-    //     }
-
-    // }
-    } catch(Exception $e){
+    if(empty($nameError) && empty($usernameError) && empty($passwdError)){
+        if(updateUser($id, $name, $username, $passwd, $photo)){
+            echo '<div class="alert alert-success" role="alert">
+                    User updated successfully! <a href="./?page=user/list" class="alert-link">Go back to list</a>
+                </div>';
+            $targetUser = readUser($id);
+        } else {
+            echo '<div class="alert alert-danger" role="alert">
+                    Failed to update user!
+                </div>';
+        }
+    }} catch(Exception $e){
         echo '<div class="alert alert-danger" role="alert">
                  '. $e -> getMessage().'
                 </div>';

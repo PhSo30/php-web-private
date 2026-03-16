@@ -41,6 +41,29 @@ function deleteUser($id){
     } 
     return false;
 }
+function updateUser($id, $name, $username, $password, $photo){
+    global $db;
+    $image_path = null;
+    if(empty($password)){
+        $password = readUser($id)->passwd;
+    }
+    if(!empty($photo['name'])){
+        $image_path = uploadImage($photo);
+    }
+    if($image_path){
+        $query = $db->prepare('UPDATE tbl_users SET name = ?, username = ?, passwd = ?, photo = ? WHERE id = ?');
+        $query->bind_param('ssssi', $name,$username, $password,$image_path, $id);
+    } else {
+        $query = $db->prepare('UPDATE tbl_users SET name = ?, username = ?, passwd = ? WHERE id = ?');
+        $query->bind_param('sssi', $name,$username, $password, $id);
+    }
+    
+    $query->execute();
+    if($query->affected_rows){
+        return true;
+    } 
+    return false;
+}
 
 
 ?>
