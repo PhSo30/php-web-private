@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container" .bg-dark.bg-gradient>
-        <a class="navbar-brand" href="<?php echo $baseUrl ?>?page=dashboard">Navbar</a>
+        <a class="navbar-brand" href="<?php echo $baseUrl ?>?page=dashboard"><i class="bi bi-house-door-fill"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
                 </li>-->
                 <li class="nav-item">
                     <?php if ($isAdmin) { ?>
-                        <a class="nav-link" href="<?php echo $baseUrl ?>?page=user/list">User</a>
+                        <a class="nav-link" href="<?php echo $baseUrl ?>?page=user/list">User <i class="bi bi-people-fill"></i></a>
                     <?php } ?>
                 </li>
                 <li class="nav-item dropdown">
@@ -28,8 +28,8 @@
                             </li>
                             <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=register">Register</a></li>
                         <?php } else { ?>
-                            <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=logout">Logout</a></li>
-                            <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=logout">Logout <i class="bi bi-door-open-fill"></i></a></li>
+                            <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=profile">Profile <i class="bi bi-person-circle"></i></a></li>
                         <?php } ?>
                     </ul>
                 </li>

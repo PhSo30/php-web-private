@@ -33,6 +33,12 @@ function readUser($id){
 }
 function deleteUser($id){
     global $db;
+    if(readUser($id) == null || readUser($id)->level == 'admin'){
+        return false;
+    }
+    if(file_exists(readUser($id)->photo)){
+        unlink(readUser($id)->photo);
+    }
     $query = $db->prepare('DELETE FROM tbl_users WHERE id = ?');
     $query->bind_param('i', $id);
     $query->execute();
